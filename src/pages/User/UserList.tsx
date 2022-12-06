@@ -42,9 +42,7 @@ const UserList = () => {
 
         const handleSave = (e: any, id: number) => {
             e.preventDefault();
-
-
-
+            
             const newUserObj = {
                 id: id,
                 username: e.target.username.value,
@@ -79,12 +77,13 @@ const UserList = () => {
                 })
         }
 
-        const hahdleCancel = (e: any) => {
-            e.stopPropagation()
+        const handleCancel = (e: any) => {
+            e.stopPropagetion()
             setOpen(false)
         }
 
-        const handleChange = () => {
+        const handleChange = (e: any) => {
+            e.stopImmediatePropagation()
             setShowSaveButton(true)
         }
 
@@ -138,7 +137,7 @@ const UserList = () => {
                                                                 name="username"
                                                                 label="Username"
                                                                 defaultValue={userFields[user.id]?.length ? userFields[user.id][0].username : ''}
-                                                                onChange={handleChange}
+                                                                onChange={(e: any) => handleChange(e)}
                                                                 required
                                                             />
                                                             <TextInput
@@ -147,7 +146,7 @@ const UserList = () => {
                                                                 name="email"
                                                                 label="Email"
                                                                 defaultValue={userFields[user.id][0].email || ''}
-                                                                onChange={handleChange}
+                                                                onChange={(e: any) => handleChange(e)}
                                                                 required
                                                                 pattern="\S+@\S+\.\S+"
                                                             />
@@ -161,7 +160,7 @@ const UserList = () => {
                                                                 name="phone"
                                                                 label="Phone"
                                                                 defaultValue={userFields[user.id]?.length ? userFields[user.id][0].phone : ''}
-                                                                onChange={handleChange}
+                                                                onChange={(e: any) => handleChange(e)}
                                                                 required
                                                             />
                                                             <TextInput
@@ -170,7 +169,7 @@ const UserList = () => {
                                                                 name="city"
                                                                 label="City"
                                                                 defaultValue={userFields[user.id]?.length ? userFields[user.id][0].address.city : ''}
-                                                                onChange={handleChange}
+                                                                onChange={(e: any) => handleChange(e)}
                                                                 required
                                                             />
                                                         </FormGroup>
@@ -183,7 +182,7 @@ const UserList = () => {
                                                                 name="street"
                                                                 label="Street"
                                                                 defaultValue={userFields[user.id]?.length ? userFields[user.id][0].address.street : ''}
-                                                                onChange={handleChange}
+                                                                onChange={(e: any) => handleChange(e)}
                                                             />
                                                             <TextInput
                                                                 type="text"
@@ -191,7 +190,7 @@ const UserList = () => {
                                                                 name="suite"
                                                                 label="Suite"
                                                                 defaultValue={userFields[user.id]?.length ? userFields[user.id][0].address.suite : ''}
-                                                                onChange={handleChange}
+                                                                onChange={(e: any) => handleChange(e)}
                                                             />
                                                         </FormGroup>
                                                     </MuiGrid>
@@ -206,7 +205,7 @@ const UserList = () => {
                                                                 </MuiGrid>
                                                             }
                                                             <MuiGrid item>
-                                                                <Button color="secondary" onClick={hahdleCancel}>
+                                                                <Button color="secondary" onClick={handleCancel}>
                                                                     Cancel
                                                                 </Button>
                                                             </MuiGrid>
