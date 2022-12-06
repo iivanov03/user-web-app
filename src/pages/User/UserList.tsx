@@ -19,7 +19,6 @@ const UserList = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { userList, loadingUsers } = useSelector((state: RootState) => state.users);
     const [userFields, setUserFields] = useState<any>({});
-    const [showSaveButton, setShowSaveButton] = useState(false);
 
     useEffect(() => {
         dispatch(getUserList())
@@ -42,7 +41,7 @@ const UserList = () => {
 
         const handleSave = (e: any, id: number) => {
             e.preventDefault();
-            
+
             const newUserObj = {
                 id: id,
                 username: e.target.username.value,
@@ -72,7 +71,6 @@ const UserList = () => {
                         const userData = updatedUserObj[id][0];
                         updatedUserObj[id][0] = { ...userData, ...updatedUsers };
                         setUserFields(updatedUserObj);
-                        setShowSaveButton(false)
                     }
                 })
         }
@@ -83,8 +81,7 @@ const UserList = () => {
         }
 
         const handleChange = (e: any) => {
-            e.stopImmediatePropagation()
-            setShowSaveButton(true)
+            e.stopPropagetion()
         }
 
 
@@ -196,14 +193,11 @@ const UserList = () => {
                                                     </MuiGrid>
                                                     <MuiGrid item xs={12}>
                                                         <MuiGrid container spacing={3} justifyContent="flex-end">
-                                                            {
-                                                                showSaveButton &&
-                                                                <MuiGrid item>
-                                                                    <Button type="submit" variant="text" color="primary">
-                                                                        Save
-                                                                    </Button>
-                                                                </MuiGrid>
-                                                            }
+                                                            <MuiGrid item>
+                                                                <Button type="submit" variant="text" color="primary">
+                                                                    Save
+                                                                </Button>
+                                                            </MuiGrid>
                                                             <MuiGrid item>
                                                                 <Button color="secondary" onClick={handleCancel}>
                                                                     Cancel
